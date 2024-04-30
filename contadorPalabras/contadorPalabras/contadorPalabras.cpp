@@ -49,15 +49,12 @@ int main() {
         }
     }
 
-    int palabrasTotales = palabrasParalelas;
-
-    if (palabrasTotales == palabrasSecuenciales) {
-        cout << "El número de palabras calculado por el programa es correcto: " << palabrasTotales << endl;
+    if (palabrasParalelas == palabrasSecuenciales) {
+        cout << "El numero de palabras calculado es correcto: " << palabrasParalelas << endl;
     }
     else {
-        cout << "El número de palabras calculado por el programa no coincide con el cálculo secuencial." << endl;
+        cout << "El numero de palabras calculado no coincide con el calculo secuencial." << endl;
     }
-
 
 /*
 #pragma omp parallel for reduction(+:vocales)
@@ -70,6 +67,5 @@ int main() {
 
     cout << "Cantidad de vocales : " << vocales << endl;
 */
-
     return 0;
 }
