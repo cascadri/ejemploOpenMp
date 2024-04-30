@@ -58,5 +58,18 @@ int main() {
         cout << "El número de palabras calculado por el programa no coincide con el cálculo secuencial." << endl;
     }
 
+
+/*
+#pragma omp parallel for reduction(+:vocales)
+    for (int i = 0; i < texto.size(); i++) {
+        if (texto[i] == '\n') {
+            string seccion = texto.substr(0, i);
+            i = 0;
+        }
+    }
+
+    cout << "Cantidad de vocales : " << vocales << endl;
+*/
+
     return 0;
 }
