@@ -22,8 +22,19 @@ int contarPalabras(string seccionTexto) {
     return contador;
 }
 
+int contarVocales(const string& texto) {
+    int contador = 0;
+    for (char caracter : texto) {
+        if (caracter == 'a' || caracter == 'e' || caracter == 'i' || caracter == 'o' || caracter == 'u' ||
+            caracter == 'A' || caracter == 'E' || caracter == 'I' || caracter == 'O' || caracter == 'U') {
+            contador++;
+        }
+    }
+    return contador;
+}
+
 int main() {
-    string textoO = cargarTexto("C:\\Users\\algarci1\\OneDrive - Intel Corporation\\Documents\\a.txt");
+    string textoO = cargarTexto("C:\\Users\\fjfue\\OneDrive\\Escritorio\\a.txt");
     int palabrasSecuenciales = contarPalabras(textoO);
     int palabrasParalelas = 0;
     string texto = textoO;
