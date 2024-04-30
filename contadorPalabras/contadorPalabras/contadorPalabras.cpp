@@ -22,8 +22,19 @@ int contarPalabras(string seccionTexto) {
     return contador;
 }
 
+int contarVocales(const string& texto) {
+    int contador = 0;
+    for (char caracter : texto) {
+        if (caracter == 'a' || caracter == 'e' || caracter == 'i' || caracter == 'o' || caracter == 'u' ||
+            caracter == 'A' || caracter == 'E' || caracter == 'I' || caracter == 'O' || caracter == 'U') {
+            contador++;
+        }
+    }
+    return contador;
+}
+
 int main() {
-    string textoO = cargarTexto("C:\\Users\\algarci1\\OneDrive - Intel Corporation\\Documents\\a.txt");
+    string textoO = cargarTexto("C:\\Users\\fjfue\\OneDrive\\Escritorio\\a.txt");
     int palabrasSecuenciales = contarPalabras(textoO);
     int palabrasParalelas = 0;
     string texto = textoO;
@@ -38,14 +49,23 @@ int main() {
         }
     }
 
-    int palabrasTotales = palabrasParalelas;
-
-    if (palabrasTotales == palabrasSecuenciales) {
-        cout << "El número de palabras calculado por el programa es correcto: " << palabrasTotales << endl;
+    if (palabrasParalelas == palabrasSecuenciales) {
+        cout << "El numero de palabras calculado es correcto: " << palabrasParalelas << endl;
     }
     else {
-        cout << "El número de palabras calculado por el programa no coincide con el cálculo secuencial." << endl;
+        cout << "El numero de palabras calculado no coincide con el calculo secuencial." << endl;
     }
 
+/*
+#pragma omp parallel for reduction(+:vocales)
+    for (int i = 0; i < texto.size(); i++) {
+        if (texto[i] == '\n') {
+            string seccion = texto.substr(0, i);
+            i = 0;
+        }
+    }
+
+    cout << "Cantidad de vocales : " << vocales << endl;
+*/
     return 0;
 }
