@@ -34,11 +34,11 @@ int contarVocales(const string& texto) {
 }
 
 int main() {
-    string textoO = cargarTexto("C:\\Users\\fjfue\\OneDrive\\Escritorio\\a.txt");
+    string textoO = cargarTexto("C:\\Users\\leslymva\\OneDrive - Intel Corporation\\Documents\\UNA\\Programación paralela\\prueba.txt");
     int palabrasSecuenciales = contarPalabras(textoO);
     int palabrasParalelas = 0;
     string texto = textoO;
-
+    // Dividir el texto en secciones por párrafos
 #pragma omp parallel for reduction(+:palabrasParalelas)
     for (int i = 0; i < texto.size(); i++) {
         if (texto[i] == '\n') {
@@ -49,23 +49,34 @@ int main() {
         }
     }
 
-    if (palabrasParalelas == palabrasSecuenciales) {
-        cout << "El numero de palabras calculado es correcto: " << palabrasParalelas << endl;
+    // Suma de resultados parciales
+    int palabrasTotales = palabrasParalelas;
+
+    // Verificación de resultados
+    if (palabrasTotales == palabrasSecuenciales) {
+        cout << "El numero de palabras calculado por el programa es correcto: " << palabrasTotales << endl;
     }
     else {
-        cout << "El numero de palabras calculado no coincide con el calculo secuencial." << endl;
+        cout << "El numero de palabras calculado por el programa no coincide con el calculo secuencial." << endl;
     }
 
-/*
+    int vocales = 0;
+    texto = textoO;
+
+    // Dividir el texto en secciones por párrafos
 #pragma omp parallel for reduction(+:vocales)
     for (int i = 0; i < texto.size(); i++) {
         if (texto[i] == '\n') {
             string seccion = texto.substr(0, i);
+            vocales += contarVocales(seccion);
+            texto = texto.substr(i + 1);
             i = 0;
         }
     }
 
-    cout << "Cantidad de vocales : " << vocales << endl;
-*/
+    cout << "La cantidad de vocales en el texto es: " << vocales << endl;
+    cout << "Secuencial: La cantidad de palabras en el texto es: " << palabrasSecuenciales << endl;
+    cout << "Paralela: La cantidad de palabras en el texto es: " << palabrasParalelas << endl;
+
     return 0;
 }
